@@ -1,8 +1,8 @@
 function organizeInventory(inventory) {
-    return inventory.reduce((acc, { name, quantity, category }) => {
-        if (!acc[category]) acc[category] = {};
-        if (!acc[category][name]) acc[category][name] = 0;
-        acc[category][name] += quantity;
-        return acc;
+    return inventory.reduce((acc, { category, name, quantity }) => {
+      acc[category] ||= {};
+      acc[category][name] = acc[category][name] ||= 0;
+      acc[category][name] += quantity;
+      return acc;
     }, {});
-}
+  }
