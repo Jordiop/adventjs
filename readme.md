@@ -1,29 +1,31 @@
-# AdventJS 2024
-- [Dia 1](./2024/day1)
-- [Dia 2](./2024/day2)
-- [Dia 3](./2024/day3)
-- [Dia 4](./2024/day4)
-- [Dia 5](./2024/day5)
-- [Dia 6](./2024/day6)
-- [Dia 7](./2024/day7)
-- [Dia 8](./2024/day8)
-- [Dia 9](./2024/day9)
-- [Dia 10](./2024/day10)
-- [Dia 11](./2024/day11)
-- [Dia 12](./2024/day12)
-- [Dia 13](./2024/day13)
-- [Dia 14](./2024/day14)
-- [Dia 15](./2024/day15)
-- [Dia 16](./2024/day16)
-- [Dia 17](./2024/day17)
-- [Dia 18](./2024/day18)
-- [Dia 19](./2024/day19)
-- [Dia 20](./2024/day20)
-- [Dia 21](./2024/day21)
-- [Dia 22](./2024/day22)
-- [Dia 23](./2024/day23)
-- [Dia 24](./2024/day24)
-- [Dia 25](./2024/day25)
-### Bonus
-- [Dia 26](./2024/day26)
-    
+# AdventJS 🎄
+
+Repositorio de soluciones para los retos de [AdventJS](https://adventjs.dev), una serie de desafíos de programación en JavaScript creados por [@midudev](https://github.com/midudev).
+
+## 📝 Descripción
+
+AdventJS es una colección de retos de programación navideños diseñados para mejorar tus habilidades en JavaScript. Cada reto presenta un problema único que debe resolverse con código.
+
+## 🚀 Estructura del Proyecto
+
+```
+202X/
+├── day1/
+│   ├── script.js
+│   └── README.md
+├── day2/
+│   ├── script.js
+│   └── README.md
+└── ...
+```
+
+## 🛠️ Tecnologías
+
+- Typescript
+- JavaScript
+- Node.js
+
+## 🔗 Enlaces
+
+- [AdventJS oficial](https://adventjs.dev)
+- [Twitter @midudev](https://twitter.com/midudev)
