@@ -15,8 +15,8 @@ export default defineAppConfig({
     siteName: 'Nuxt Docs Template'
   },
   header: {
-    title: '',
-    to: '/',
+    title: 'Visor',
+    to: '/adventjs',
     logo: {
       alt: '',
       light: '',
