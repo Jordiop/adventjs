@@ -11,9 +11,8 @@ async function readScriptFile(year: string, day: string): Promise<{ script: stri
       }
     } catch (error) {
       // Silently continue to next extension or fallback
-        console.log('Server assets script file not found, falling back to filesystem')
-        console.log(error)
-      
+      console.log('Server assets script file not found, falling back to filesystem')
+      console.log(error)
     }
   }
 
@@ -26,8 +25,7 @@ async function readScriptFile(year: string, day: string): Promise<{ script: stri
     } catch (error) {
       // Continue to next extension
       console.log('Server assets script file not found, falling back to filesystem')
-        console.log(error)
-      
+      console.log(error)
     }
   }
 
