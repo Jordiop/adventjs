@@ -11,6 +11,9 @@ async function readScriptFile(year: string, day: string): Promise<{ script: stri
       }
     } catch (error) {
       // Silently continue to next extension or fallback
+        console.log('Server assets script file not found, falling back to filesystem')
+        console.log(error)
+      
     }
   }
 
@@ -22,6 +25,9 @@ async function readScriptFile(year: string, day: string): Promise<{ script: stri
       return { script, extension: ext }
     } catch (error) {
       // Continue to next extension
+      console.log('Server assets script file not found, falling back to filesystem')
+        console.log(error)
+      
     }
   }
 
@@ -59,6 +65,8 @@ export default defineEventHandler(async (event) => {
       // Fallback to filesystem
       const baseDir = join(process.cwd(), 'content', year, `day${day}`)
       readme = await readFile(join(baseDir, 'readme.md'), 'utf-8')
+      console.log('Server assets readme not found, falling back to filesystem')
+      console.log(storageError)
     }
 
     const { script, extension } = await readScriptFile(year, day)
