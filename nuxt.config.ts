@@ -34,7 +34,20 @@ export default defineNuxtConfig({
       ],
       crawlLinks: true,
       autoSubfolderIndex: false
-    }
+    },
+    publicAssets: [
+      {
+        dir: 'content',
+        maxAge: 60 * 60 * 24 * 365,
+        baseURL: '_content'
+      }
+    ],
+    serverAssets: [
+      {
+        baseName: 'content',
+        dir: './content'
+      }
+    ]
   },
 
   eslint: {
