@@ -31,7 +31,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const dayFolder = `day${day}`
-  const baseDir = join(process.cwd(), '..', year, dayFolder)
+  const baseDir = join(process.cwd(), year, dayFolder)
 
   try {
     const readme = await readFile(join(baseDir, 'readme.md'), 'utf-8')

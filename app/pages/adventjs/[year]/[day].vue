@@ -37,7 +37,7 @@ useSeoMeta({
       </UPageHeader>
 
       <UPageBody>
-        <div class="space-y-8">
+        <div class="space-x-2 grid grid-cols-1 md:grid-cols-2">
           <!-- Exercise Description -->
           <UCard>
             <template #header>
