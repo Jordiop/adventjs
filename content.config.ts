@@ -10,7 +10,12 @@ export default defineContentConfig({
       type: 'page',
       source: {
         include: '**',
-        exclude: ['index.md']
+        exclude: [
+          'index.md',
+          '**/*.js',
+          '**/*.ts',
+          '**/*.sqlite'
+        ]
       },
       schema: z.object({
         links: z.array(z.object({
