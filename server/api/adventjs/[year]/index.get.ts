@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
     const entries = await readdir(baseDir, { withFileTypes: true })
     const days = entries
       .filter(entry => entry.isDirectory() && entry.name.startsWith('day'))
-      .map(entry => {
+      .map((entry) => {
         const dayNum = entry.name.replace('day', '')
         return {
           day: parseInt(dayNum),
@@ -31,6 +31,7 @@ export default defineEventHandler(async (event) => {
       days
     }
   } catch (error) {
+    console.log(error)
     throw createError({
       statusCode: 500,
       statusMessage: 'Failed to read exercises'

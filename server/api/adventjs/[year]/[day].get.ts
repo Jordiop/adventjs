@@ -1,12 +1,13 @@
 import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 
-async function readScriptFile(baseDir: string): Promise<{ script: string; extension: string }> {
+async function readScriptFile(baseDir: string): Promise<{ script: string, extension: string }> {
   for (const ext of ['ts', 'js']) {
     try {
       const script = await readFile(join(baseDir, `script.${ext}`), 'utf-8')
       return { script, extension: ext }
-    } catch {
+    } catch (error) {
+      console.log(error)
     }
   }
   throw new Error('Script file not found')
@@ -45,6 +46,7 @@ export default defineEventHandler(async (event) => {
       language: extension === 'ts' ? 'typescript' : 'javascript'
     }
   } catch (error) {
+    console.log(error)
     throw createError({
       statusCode: 404,
       statusMessage: 'Exercise not found'

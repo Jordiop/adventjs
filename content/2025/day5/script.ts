@@ -1,5 +1,5 @@
-type ElfDateTime =
-  `${number}*${number}*${number}@${number}|${number}|${number} NP`
+type ElfDateTime
+  = `${number}*${number}*${number}@${number}|${number}|${number} NP`
 
 function timeUntilTakeOff(
   fromTime: ElfDateTime,
@@ -13,9 +13,11 @@ function timeUntilTakeOff(
     const date = Date.UTC(year, month - 1, day, hours, minutes, seconds)
     return Math.floor(date / 1000)
   }
-  
+
   const fromTimestamp = parseElfDateTime(fromTime)
   const takeOffTimestamp = parseElfDateTime(takeOffTime)
 
   return takeOffTimestamp - fromTimestamp
 }
+
+timeUntilTakeOff('2025*12*24@18|30|00 NP', '2025*12*25@06|00|00 NP')
