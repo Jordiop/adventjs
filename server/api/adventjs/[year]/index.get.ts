@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const baseDir = join(process.cwd(), year)
+  const baseDir = join(process.cwd(), 'content', year)
 
   try {
     const entries = await readdir(baseDir, { withFileTypes: true })
