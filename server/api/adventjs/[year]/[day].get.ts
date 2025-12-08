@@ -1,35 +1,51 @@
 import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 
-async function readScriptFile(year: string, day: string): Promise<{ script: string, extension: string }> {
-  // Try server assets first (for production)
-  for (const ext of ['ts', 'js']) {
-    try {
-      const script = await useStorage('assets:content').getItem(`${year}/day${day}/script.${ext}`)
-      if (script) {
-        return { script: script as string, extension: ext }
-      }
-    } catch (error) {
-      // Silently continue to next extension or fallback
-      console.log('Server assets script file not found, falling back to filesystem')
-      console.log(error)
+async function readIndexFile(year: string, day: string): Promise<string> {
+  try {
+    const content = await useStorage('assets:content').getItem(`${year}/day${day}/index.md`)
+    if (content) {
+      return content as string
     }
+  } catch (error) {
+    console.log('Server assets index.md not found, falling back to filesystem')
+    console.log(error)
   }
 
-  // Fallback to filesystem (for development)
   const baseDir = join(process.cwd(), 'content', year, `day${day}`)
-  for (const ext of ['ts', 'js']) {
-    try {
-      const script = await readFile(join(baseDir, `script.${ext}`), 'utf-8')
-      return { script, extension: ext }
-    } catch (error) {
-      // Continue to next extension
-      console.log('Server assets script file not found, falling back to filesystem')
-      console.log(error)
-    }
+  try {
+    return await readFile(join(baseDir, 'index.md'), 'utf-8')
+  } catch (error) {
+    console.log('Filesystem index.md not found')
+    console.log(error)
+    throw new Error('Index file not found')
+  }
+}
+
+function parseIndexContent(content: string): { readme: string, script: string, language: string } {
+  const withoutFrontmatter = content.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n/, '')
+
+  const parts = withoutFrontmatter.split(/\r?\n## Solution\r?\n/)
+  if (parts.length < 2 || !parts[0] || !parts[1]) {
+    throw new Error('Invalid index.md format - missing Solution section')
   }
 
-  throw new Error('Script file not found')
+  const readme = parts[0].trim()
+  const solutionSection = parts[1].trim()
+
+  const codeBlockMatch = solutionSection.match(/```(typescript|javascript)\r?\n([\s\S]*?)\r?\n```/)
+  if (!codeBlockMatch || !codeBlockMatch[1] || !codeBlockMatch[2]) {
+    throw new Error('Invalid index.md format - missing code block')
+  }
+
+  const language = codeBlockMatch[1]
+  const script = codeBlockMatch[2]
+
+  return {
+    readme,
+    script,
+    language
+  }
 }
 
 export default defineEventHandler(async (event) => {
@@ -51,34 +67,15 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    let readme: string | null = null
-
-    // Try server assets first (for production)
-    try {
-      const readmeContent = await useStorage('assets:content').getItem(`${year}/day${day}/readme.md`)
-      if (readmeContent) {
-        readme = readmeContent as string
-      }
-    } catch (storageError) {
-      // Fallback to filesystem
-      const baseDir = join(process.cwd(), 'content', year, `day${day}`)
-      readme = await readFile(join(baseDir, 'readme.md'), 'utf-8')
-      console.log('Server assets readme not found, falling back to filesystem')
-      console.log(storageError)
-    }
-
-    const { script, extension } = await readScriptFile(year, day)
-
-    if (!readme) {
-      throw new Error('Readme not found')
-    }
+    const indexContent = await readIndexFile(year, day)
+    const { readme, script, language } = parseIndexContent(indexContent)
 
     return {
       year,
       day: parseInt(day),
       readme,
       script,
-      language: extension === 'ts' ? 'typescript' : 'javascript'
+      language
     }
   } catch (error) {
     console.log(error)

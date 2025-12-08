@@ -12,8 +12,6 @@ export default defineContentConfig({
         include: '**',
         exclude: [
           'index.md',
-          '**/*.js',
-          '**/*.ts',
           '**/*.sqlite'
         ]
       },
