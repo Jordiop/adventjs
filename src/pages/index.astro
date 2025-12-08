@@ -27,89 +27,57 @@ Object.keys(exercisesByYear).forEach(year => {
 const sortedYears = Object.keys(exercisesByYear).sort((a, b) => parseInt(b) - parseInt(a));
 ---
 
-<Layout title="Advent of JavaScript - Exercises">
-  <h1>🎄 Advent of JavaScript</h1>
-  <p class="subtitle">Daily coding challenges and solutions</p>
+<Layout title="AdventJS - Exercises">
+  <div class="animate-fade-in">
 
-  {sortedYears.map(year => (
-    <section class="year-section">
-      <h2>{year}</h2>
-      <div class="exercises-grid">
-        {exercisesByYear[year].map(exercise => {
-          const dayNum = exercise.slug.split('/')[1].replace('day', '');
-          return (
-            <a href={`/${exercise.slug}`} class="exercise-card">
-              <span class="day-badge">Day {dayNum}</span>
-              <h3>{exercise.data.title || `Día ${dayNum}`}</h3>
-            </a>
-          );
-        })}
-      </div>
-    </section>
-  ))}
+    {sortedYears.map((year, yearIndex) => (
+      <section class="mb-16 animate-slide-up" style={`animation-delay: ${(yearIndex + 2) * 0.1}s;`}>
+        <div class="flex items-center gap-3 mb-6">
+          <h2 class="text-4xl font-bold text-accent">
+            {year}
+          </h2>
+          <div class="flex-1 h-0.5 bg-gradient-to-r from-accent to-transparent"></div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          {exercisesByYear[year].map((exercise, index) => {
+            const dayNum = exercise.slug.split('/')[1].replace('day', '');
+            return (
+              <a
+                href={`/${exercise.slug}`}
+                class="group relative bg-gradient-to-br from-bg-card to-slate-800 border-2 border-slate-700 rounded-xl p-6
+                       transition-all duration-300 hover:border-accent hover:-translate-y-2 hover:shadow-xl hover:shadow-accent/20
+                       animate-scale-in overflow-hidden"
+                style={`animation-delay: ${index * 0.05}s;`}
+              >
+                {/* Shine effect on hover */}
+                <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300
+                            bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full
+                            group-hover:translate-x-full"
+                     style="transition: transform 0.6s ease-in-out;"></div>
+
+                <div class="relative flex flex-col gap-3">
+                  <div class="flex items-center justify-between">
+                    <span class="inline-block bg-gradient-to-r from-accent to-green-400 text-bg-dark px-3 py-1
+                                 rounded-md text-sm font-bold group-hover:scale-110 transition-transform duration-300">
+                      Day {dayNum}
+                    </span>
+                  </div>
+
+                  <h3 class="text-lg font-semibold text-slate-100 leading-snug group-hover:text-accent transition-colors duration-300">
+                    Challenge {dayNum}
+                  </h3>
+
+                  <div class="flex items-center gap-2 text-sm text-slate-400 group-hover:text-accent transition-colors duration-300">
+                    <span>View challenge</span>
+                    <span class="transform group-hover:translate-x-2 transition-transform duration-300">→</span>
+                  </div>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </section>
+    ))}
+  </div>
 </Layout>
-
-<style>
-  h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .subtitle {
-    font-size: 1.25rem;
-    color: #94a3b8;
-    margin-bottom: 3rem;
-  }
-
-  .year-section {
-    margin-bottom: 3rem;
-  }
-
-  .year-section h2 {
-    font-size: 2rem;
-    color: var(--accent);
-    margin-bottom: 1rem;
-    border-bottom: 2px solid var(--accent);
-    padding-bottom: 0.5rem;
-  }
-
-  .exercises-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1rem;
-  }
-
-  .exercise-card {
-    background: var(--code-bg);
-    border: 2px solid #334155;
-    border-radius: 8px;
-    padding: 1.5rem;
-    text-decoration: none;
-    color: var(--text);
-    transition: all 0.2s;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .exercise-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-2px);
-  }
-
-  .day-badge {
-    display: inline-block;
-    background: var(--accent);
-    color: var(--bg);
-    padding: 0.25rem 0.75rem;
-    border-radius: 4px;
-    font-size: 0.875rem;
-    font-weight: bold;
-    width: fit-content;
-  }
-
-  .exercise-card h3 {
-    font-size: 1rem;
-    line-height: 1.4;
-  }
-</style>

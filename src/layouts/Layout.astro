@@ -7,7 +7,7 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content="Advent of JavaScript Exercises" />
@@ -16,61 +16,64 @@ const { title } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body>
-    <header>
-      <nav>
-        <a href="/">🎄 Advent of JavaScript</a>
+  <body class="min-h-screen bg-gradient-to-br from-bg-dark via-slate-900 to-bg-dark text-slate-100">
+    <!-- Animated background pattern -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none opacity-20">
+      <div class="absolute top-0 -left-4 w-72 h-72 bg-accent rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
+      <div class="absolute top-0 -right-4 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
+      <div class="absolute -bottom-8 left-20 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
+    </div>
+
+    <header class="relative bg-bg-card/80 backdrop-blur-md border-b-2 border-accent shadow-lg sticky top-0 z-50 animate-slide-up">
+      <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <a
+          href="/"
+          class="inline-flex items-center gap-2 text-accent hover:text-accent-dark text-2xl font-bold transition-all duration-300 hover:scale-105 group"
+        >
+          <span class="group-hover:animate-bounce-subtle">🎄</span>
+          <span class="bg-gradient-to-r from-accent to-green-400 bg-clip-text text-transparent">
+            AdventJS
+          </span>
+        </a>
       </nav>
     </header>
-    <main>
+
+    <main class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-fade-in">
       <slot />
     </main>
-    <style>
-      :root {
-        --accent: #22c55e;
-        --accent-dark: #16a34a;
-        --bg: #0f172a;
-        --text: #f1f5f9;
-        --code-bg: #1e293b;
+
+    <footer class="relative mt-16 py-8 border-t border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-400">
+        <p class="text-sm">Jordiop</p>
+      </div>
+    </footer>
+
+    <style is:global>
+      @keyframes blob {
+        0% {
+          transform: translate(0px, 0px) scale(1);
+        }
+        33% {
+          transform: translate(30px, -50px) scale(1.1);
+        }
+        66% {
+          transform: translate(-20px, 20px) scale(0.9);
+        }
+        100% {
+          transform: translate(0px, 0px) scale(1);
+        }
       }
 
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
+      .animate-blob {
+        animation: blob 7s infinite;
       }
 
-      html {
-        font-family: system-ui, sans-serif;
-        background: var(--bg);
-        color: var(--text);
+      .animation-delay-2000 {
+        animation-delay: 2s;
       }
 
-      body {
-        min-height: 100vh;
-      }
-
-      header {
-        background: var(--code-bg);
-        padding: 1rem 2rem;
-        border-bottom: 2px solid var(--accent);
-      }
-
-      nav a {
-        color: var(--accent);
-        text-decoration: none;
-        font-size: 1.5rem;
-        font-weight: bold;
-      }
-
-      nav a:hover {
-        color: var(--accent-dark);
-      }
-
-      main {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 2rem;
+      .animation-delay-4000 {
+        animation-delay: 4s;
       }
     </style>
   </body>
