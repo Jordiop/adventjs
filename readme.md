@@ -1,62 +1,92 @@
-# Nuxt Docs Template
+# Advent of JavaScript - Exercise Website
 
-[![Nuxt UI](https://img.shields.io/badge/Made%20with-Nuxt%20UI-00DC82?logo=nuxt&labelColor=020420)](https://ui.nuxt.com)
+A beautiful website to display your Advent of JavaScript coding challenges and solutions, built with Astro.
 
-Use this template to build your own documentation with [Nuxt UI](https://ui.nuxt.com) quickly.
+## Features
 
-- [Live demo](https://docs-template.nuxt.dev/)
-- [Documentation](https://ui.nuxt.com/docs/getting-started/installation)
+- Displays exercises organized by year (2024, 2025)
+- Individual pages for each day's challenge
+- Syntax highlighting for JavaScript/TypeScript code
+- Dark theme optimized for code reading
+- Fast static site generation
+- Responsive design
 
-<a href="https://docs-template.nuxt.dev/" target="_blank">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://ui.nuxt.com/assets/templates/nuxt/docs-dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="https://ui.nuxt.com/assets/templates/nuxt/docs-light.png">
-    <img alt="Nuxt Docs Template" src="https://ui.nuxt.com/assets/templates/nuxt/docs-light.png">
-  </picture>
-</a>
+## Project Structure
 
-## Quick Start
-
-```bash [Terminal]
-npm create nuxt@latest -- -t github:nuxt-ui-templates/docs
+```text
+/
+├── src/
+│   ├── content/
+│   │   ├── exercises/
+│   │   │   ├── 2024/
+│   │   │   │   ├── day1/index.md
+│   │   │   │   ├── day2/index.md
+│   │   │   │   └── ...
+│   │   │   └── 2025/
+│   │   │       ├── day1/index.md
+│   │   │       └── ...
+│   │   └── config.ts
+│   ├── layouts/
+│   │   └── Layout.astro
+│   └── pages/
+│       ├── index.astro
+│       └── [...slug].astro
+└── package.json
 ```
 
-## Deploy your own
+## 🧞 Commands
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-name=docs&repository-url=https%3A%2F%2Fgithub.com%2Fnuxt-ui-templates%2Fdocs&demo-image=https%3A%2F%2Fui.nuxt.com%2Fassets%2Ftemplates%2Fnuxt%2Fdocs-dark.png&demo-url=https%3A%2F%2Fdocs-template.nuxt.dev%2F&demo-title=Nuxt%20Docs%20Template&demo-description=A%20documentation%20template%20powered%20by%20Nuxt%20Content.)
+All commands are run from the root of the project, from a terminal:
 
-## Setup
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm install`             | Installs dependencies                            |
+| `npm run dev`             | Starts local dev server at `localhost:4321`      |
+| `npm run build`           | Build your production site to `./dist/`          |
+| `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-Make sure to install the dependencies:
+## Adding New Exercises
+
+To add new exercises, simply place your markdown files in the appropriate year folder:
 
 ```bash
-pnpm install
+src/content/exercises/YEAR/dayN/index.md
 ```
 
-## Development Server
+Each markdown file should have frontmatter with a navigation order:
 
-Start the development server on `http://localhost:3000`:
+```markdown
+---
+navigation:
+  order: 1
+---
 
-```bash
-pnpm dev
+# Title of Exercise
+
+Exercise content here...
+
+## Solution
+
+Solution code here...
 ```
 
-## Production
+## Deployment
 
-Build the application for production:
+You can deploy this site to various platforms:
 
-```bash
-pnpm build
-```
+**Netlify/Vercel/Cloudflare Pages:**
+1. Run `npm run build`
+2. Deploy the `dist/` folder
+3. Or connect your Git repository for automatic deployments
 
-Locally preview production build:
+**GitHub Pages:**
+1. Update `astro.config.mjs` with your site URL
+2. Run `npm run build`
+3. Deploy the `dist/` folder to GitHub Pages
 
-```bash
-pnpm preview
-```
+## Learn More
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
-
-## Renovate integration
-
-Install [Renovate GitHub app](https://github.com/apps/renovate/installations/select_target) on your repository and you are good to go.
+- [Astro Documentation](https://docs.astro.build)
+- [Astro Discord](https://astro.build/chat)

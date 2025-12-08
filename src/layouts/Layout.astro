@@ -1,0 +1,77 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Advent of JavaScript Exercises" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="/">🎄 Advent of JavaScript</a>
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <style>
+      :root {
+        --accent: #22c55e;
+        --accent-dark: #16a34a;
+        --bg: #0f172a;
+        --text: #f1f5f9;
+        --code-bg: #1e293b;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        font-family: system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      body {
+        min-height: 100vh;
+      }
+
+      header {
+        background: var(--code-bg);
+        padding: 1rem 2rem;
+        border-bottom: 2px solid var(--accent);
+      }
+
+      nav a {
+        color: var(--accent);
+        text-decoration: none;
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      nav a:hover {
+        color: var(--accent-dark);
+      }
+
+      main {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+    </style>
+  </body>
+</html>
