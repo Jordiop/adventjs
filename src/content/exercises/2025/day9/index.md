@@ -17,6 +17,7 @@ Importante: Ten en cuenta que en el board la primera y última línea están en 
 
 Ejemplo:
 
+```typescript
 const board = `
 .....
 .*#.*
@@ -44,6 +45,7 @@ moveReno(board, 'UUU')
 
 moveReno(board, 'RR')
 // ➞ 'fail' -> se mueve pero no recoge nada
+```
 
 ## Solution
 
