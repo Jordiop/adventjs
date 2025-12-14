@@ -43,6 +43,8 @@ findGiftPath(workshop, 'plane')
 // ➜ []
 ```
 
+## Solution
+
 ```typescript
 type Gift = string | number | boolean
 type Workshop = Record<string, any>

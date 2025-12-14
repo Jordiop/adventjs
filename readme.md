@@ -1,6 +1,6 @@
-# Advent of JavaScript - Exercise Website
+# AdventJS - Exercise Website
 
-A beautiful website to display your Advent of JavaScript coding challenges and solutions, built with Astro.
+A beautiful website to display your AdventJS coding challenges and solutions, built with Astro.
 
 ## Features
 
